@@ -1,0 +1,52 @@
+name: Sürüm yayınla
+
+# "v" ile başlayan bir etiket (ör. v1.3.1) gönderildiğinde Setup.exe kaynaktan derlenir
+# ve GitHub Releases sayfasına yüklenir.
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  derle-yayinla:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Araçları kur (NSIS + MinGW)
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -y -q nsis gcc-mingw-w64-x86-64 binutils-mingw-w64-x86-64
+
+      - name: Programı tek dosyaya derle
+        run: python3 derleme/build.py
+
+      - name: Başlatıcı EXE'yi derle
+        working-directory: kurulum
+        run: |
+          x86_64-w64-mingw32-windres app.rc -O coff -o app.res
+          x86_64-w64-mingw32-gcc -O2 -municode -mwindows launcher.c app.res -lshlwapi -o "ZETX PC Ariza Takip Onarim.exe" -s
+
+      - name: Kurulum sihirbazını (Setup.exe) derle
+        working-directory: kurulum
+        run: |
+          cp ../ZETX-PC-Ariza-Takip-Onarim.ps1 .
+          makensis -V2 setup.nsi
+          mv "ZETX PC Ariza Takip Onarim Setup.exe" ../ZETX-PC-Ariza-Takip-Onarim-Setup.exe
+
+      - name: Releases sayfasına yükle
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          if [ "${GITHUB_EVENT_NAME}" = "workflow_dispatch" ]; then TAG="v$(grep -oP "Version\s*=\s*'\K[^']+" kaynak/core.ps1)"; fi
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" ZETX-PC-Ariza-Takip-Onarim-Setup.exe --clobber
+          else
+            gh release create "$TAG" ZETX-PC-Ariza-Takip-Onarim-Setup.exe \
+              --title "ZETX PC Arıza Takip Onarım $TAG" \
+              --notes-file .github/SURUM_NOTU.md --target "${GITHUB_SHA}"
+          fi
