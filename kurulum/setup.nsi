@@ -5,7 +5,7 @@ SetCompressor /SOLID lzma
 
 !define APPNAME "ZETX PC Arıza Takip Onarım"
 !define APPEXE "ZETX PC Ariza Takip Onarim.exe"
-!define VERSION "1.3.1"
+!define VERSION "1.3.2"
 !define PUBLISHER "Volkan Sezer — ZETX"
 !define REGKEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\ZETXPCArizaTakipOnarim"
 !define TASKNAME "ZETX PC Ariza Takip - Haftalik Tarama"
@@ -16,11 +16,11 @@ InstallDir "$PROGRAMFILES64\ZETX PC Ariza Takip Onarim"
 InstallDirRegKey HKLM "${REGKEY}" "InstallLocation"
 RequestExecutionLevel admin
 BrandingText "ZETX • Volkan Sezer"
-VIProductVersion "1.3.1.0"
+VIProductVersion "1.3.2.0"
 VIAddVersionKey /LANG=1055 "ProductName" "ZETX PC ARIZA TAKIP ONARIM"
 VIAddVersionKey /LANG=1055 "CompanyName" "ZETX - Volkan Sezer"
 VIAddVersionKey /LANG=1055 "FileDescription" "ZETX PC ARIZA TAKIP ONARIM Kurulum"
-VIAddVersionKey /LANG=1055 "FileVersion" "1.3.1.0"
+VIAddVersionKey /LANG=1055 "FileVersion" "1.3.2.0"
 VIAddVersionKey /LANG=1055 "LegalCopyright" "(c) Volkan Sezer - Ucretsiz"
 
 !define MUI_ICON "zetx.ico"

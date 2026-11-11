@@ -16,7 +16,7 @@ Write-Host 'EXE oluşturuluyor...' -ForegroundColor Cyan
 Invoke-ps2exe -inputFile (Join-Path $PSScriptRoot 'ZETX-PC-Ariza-Takip-Onarim.ps1') -outputFile $out `
     -iconFile (Join-Path $PSScriptRoot 'zetx.ico') -title 'ZETX PC ARIZA TAKİP ONARIM' -product 'ZETX PC ARIZA TAKİP ONARIM' `
     -description 'Donanım/sistem arıza tespit, onarım, darboğaz ve FPS — Volkan Sezer (ücretsiz)' -company 'ZETX' -copyright '© Volkan Sezer' `
-    -version '1.3.1.0' -noConsole -STA -DPIAware -requireAdmin
+    -version '1.3.2.0' -noConsole -STA -DPIAware -requireAdmin
 Write-Host ''
 Write-Host ('TAMAM! EXE İndirilenler klasörüne kaydedildi: ' + $out) -ForegroundColor Green
 Read-Host 'Kapatmak için Enter'

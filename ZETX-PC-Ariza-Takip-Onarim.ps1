@@ -95,7 +95,7 @@ $Script:CoreCode = @'
 
 $Global:ZETX = [ordered]@{
     AppName    = 'ZETX PC ARIZA TAKİP ONARIM'
-    Version    = '1.3.1'
+    Version    = '1.3.2'
     Owner      = 'Volkan Sezer'
     Brand      = 'ZETX'
     Channel    = 'ZETXTV'
@@ -3636,6 +3636,83 @@ $jobTimer.Add_Tick({
         } catch { Write-ZErrorLog $_ 'Timer' }
     })
 
+# =====================================================================
+#  EKRAN GÖRÜNTÜSÜ MODU (Belgeler\ZETX PC Ariza Takip\ekran-goruntusu.istek varsa)
+#  Sayfaları sırayla açar, taramaları çalıştırır, her sayfanın görüntüsünü PNG kaydeder.
+# =====================================================================
+$Script:ShotFlag = Join-Path $Global:ZDataDir 'ekran-goruntusu.istek'
+$Script:ShotDir = Join-Path $Global:ZDataDir 'Ekran Goruntuleri'
+try {
+    Add-Type -Namespace ZETXNative -Name Dwm -MemberDefinition @"
+[StructLayout(LayoutKind.Sequential)] public struct RECT { public int Left, Top, Right, Bottom; }
+[DllImport("dwmapi.dll")] public static extern int DwmGetWindowAttribute(IntPtr hwnd, int attr, out RECT r, int size);
+"@ -ErrorAction Stop
+} catch {}
+
+function Save-ZShot { param([string]$Name)
+    try {
+        $form.Activate(); [System.Windows.Forms.Application]::DoEvents()
+        $x = $form.Left; $y = $form.Top; $w = $form.Width; $h = $form.Height
+        try {
+            $r = New-Object ZETXNative.Dwm+RECT
+            if ([ZETXNative.Dwm]::DwmGetWindowAttribute($form.Handle, 9, [ref]$r, 16) -eq 0) { $x = $r.Left; $y = $r.Top; $w = $r.Right - $r.Left; $h = $r.Bottom - $r.Top }
+        } catch {}
+        $bmp = New-Object System.Drawing.Bitmap($w, $h)
+        $g = [System.Drawing.Graphics]::FromImage($bmp)
+        $g.CopyFromScreen($x, $y, 0, 0, $bmp.Size)
+        $g.Dispose()
+        $bmp.Save((Join-Path $Script:ShotDir ($Name + '.png')), [System.Drawing.Imaging.ImageFormat]::Png)
+        $bmp.Dispose()
+        Write-ZActivity ('Ekran görüntüsü kaydedildi: ' + $Name)
+    } catch { Write-ZErrorLog $_ 'Save-ZShot' }
+}
+
+function Start-ZShotMode {
+    try { Remove-Item $Script:ShotFlag -Force -ErrorAction SilentlyContinue } catch {}
+    if (-not (Test-Path $Script:ShotDir)) { New-Item -ItemType Directory -Path $Script:ShotDir -Force | Out-Null }
+    Get-ChildItem $Script:ShotDir -Filter *.png -ErrorAction SilentlyContinue | Remove-Item -Force -ErrorAction SilentlyContinue
+    $form.WindowState = 'Maximized'
+    $Script:ShotSteps = @(
+        @{ Do = { Show-ZPage 'dash' }; Wait = 12; Jobs = $false; Shot = '01-genel-bakis' },
+        @{ Do = { Start-ZFullScan }; Wait = 3; Jobs = $true; Shot = '02-tarama-onarim' },
+        @{ Do = { Show-ZPage 'hw'; $h1.PerformClick() }; Wait = 2; Jobs = $true; Shot = '03-donanim' },
+        @{ Do = { Show-ZPage 'sys'; $s1.PerformClick() }; Wait = 2; Jobs = $true; Shot = '04-sistem-arizalari' },
+        @{ Do = { Show-ZPage 'drv'; $v1.PerformClick() }; Wait = 2; Jobs = $true; Shot = '05-surucu-bios' },
+        @{ Do = { Show-ZPage 'fps'; Update-ZFpsEstimate }; Wait = 3; Jobs = $false; Shot = '06-fps-oyunlar' },
+        @{ Do = { Show-ZPage 'bott'; $d1.PerformClick() }; Wait = 2; Jobs = $true; Shot = '07-darbogaz-analizi' },
+        @{ Do = { Show-ZPage 'score' }; Wait = 3; Jobs = $false; Shot = '08-sistem-puani' },
+        @{ Do = { Show-ZPage 'repair' }; Wait = 2; Jobs = $false; Shot = '09-dosya-onarimi' },
+        @{ Do = { Show-ZPage 'clean'; $cl1.PerformClick() }; Wait = 2; Jobs = $true; Shot = '10-temizlik' },
+        @{ Do = { Show-ZPage 'track' }; Wait = 2; Jobs = $false; Shot = '11-takip-rapor' },
+        @{ Do = { Show-ZPage 'about' }; Wait = 2; Jobs = $false; Shot = '12-hakkinda' }
+    )
+    $Script:ShotIdx = -1; $Script:ShotPhase = 'next'; $Script:ShotT0 = Get-Date
+    $Script:ShotTimer = New-Object System.Windows.Forms.Timer; $Script:ShotTimer.Interval = 500
+    $Script:ShotTimer.Add_Tick({
+            try {
+                if ($Script:ShotPhase -eq 'next') {
+                    $Script:ShotIdx++
+                    if ($Script:ShotIdx -ge $Script:ShotSteps.Count) {
+                        $Script:ShotTimer.Stop(); Show-ZPage 'dash'
+                        Set-Content -Path (Join-Path $Script:ShotDir 'tamam.txt') -Value (Get-Date).ToString('s') -Encoding UTF8
+                        Write-ZActivity 'Ekran görüntüleri tamamlandı.'
+                        return
+                    }
+                    & $Script:ShotSteps[$Script:ShotIdx].Do
+                    $Script:ShotT0 = Get-Date; $Script:ShotPhase = 'wait'; return
+                }
+                $st = $Script:ShotSteps[$Script:ShotIdx]
+                $el = ((Get-Date) - $Script:ShotT0).TotalSeconds
+                if ($el -lt $st.Wait) { return }
+                if ($st.Jobs -and @($Script:Jobs | Where-Object { -not $_.Quiet }).Count -gt 0 -and $el -lt 300) { return }
+                if ($st.Jobs -and $el -lt ($st.Wait + 1.5)) { return }
+                Save-ZShot $st.Shot
+                $Script:ShotPhase = 'next'
+            } catch { Write-ZErrorLog $_ 'ShotMode'; $Script:ShotPhase = 'next' }
+        })
+    $Script:ShotTimer.Start()
+}
+
 $form.Add_Shown({
         & $Script:PlaceHeader
         Show-ZPage 'dash'
@@ -3667,6 +3744,7 @@ $form.Add_Shown({
             }
             [pscustomobject]@{ R = $true }
         } @{} $null @() -Quiet
+        if (Test-Path $Script:ShotFlag) { Start-ZShotMode }
         $last = @(Get-ZHistory) | Select-Object -Last 1
         if ($last) {
             Set-ZRing $UI.Ring $last.Puan $last.Derece ('Son tarama: ' + $last.Tarih) 'SON TARAMA PUANI'

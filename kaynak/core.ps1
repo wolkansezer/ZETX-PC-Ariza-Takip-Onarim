@@ -5,7 +5,7 @@
 
 $Global:ZETX = [ordered]@{
     AppName    = 'ZETX PC ARIZA TAKİP ONARIM'
-    Version    = '1.3.1'
+    Version    = '1.3.2'
     Owner      = 'Volkan Sezer'
     Brand      = 'ZETX'
     Channel    = 'ZETXTV'

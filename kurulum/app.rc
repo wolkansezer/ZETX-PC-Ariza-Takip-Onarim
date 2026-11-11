@@ -2,8 +2,8 @@
 1 ICON "zetx.ico"
 1 24 "app.manifest"
 VS_VERSION_INFO VERSIONINFO
-FILEVERSION 1,3,1,0
-PRODUCTVERSION 1,3,1,0
+FILEVERSION 1,3,2,0
+PRODUCTVERSION 1,3,2,0
 FILEOS 0x40004
 FILETYPE 0x1
 BEGIN
@@ -13,12 +13,12 @@ BEGIN
     BEGIN
       VALUE "CompanyName", "ZETX - Volkan Sezer"
       VALUE "FileDescription", "ZETX PC ARIZA TAKIP ONARIM"
-      VALUE "FileVersion", "1.3.1.0"
+      VALUE "FileVersion", "1.3.2.0"
       VALUE "InternalName", "ZETX PC Ariza Takip Onarim"
       VALUE "LegalCopyright", "(c) Volkan Sezer - Ucretsiz"
       VALUE "OriginalFilename", "ZETX PC Ariza Takip Onarim.exe"
       VALUE "ProductName", "ZETX PC ARIZA TAKIP ONARIM"
-      VALUE "ProductVersion", "1.3.1.0"
+      VALUE "ProductVersion", "1.3.2.0"
     END
   END
   BLOCK "VarFileInfo"
