@@ -1,0 +1,34 @@
+﻿ZETX PC ARIZA TAKİP ONARIM  v1.3.1  —  ÜCRETSİZ SÜRÜM
+Geliştirici: Volkan Sezer — ZETX / ZETXTV
+Discord: https://discord.gg/nvqc84AHZf   •   E-posta: volkan.sezer@outlook.com.tr
+=====================================================================
+
+KULLANIM
+- Masaüstündeki veya Başlat menüsündeki "ZETX PC Arıza Takip Onarım" kısayoluyla açın (yönetici izni ister).
+- Program ücretsizdir; lisans veya aktivasyon gerekmez.
+- Kaldırmak için: Ayarlar > Uygulamalar veya Başlat menüsü > ZETX > Kaldır.
+
+PROGRAM BÖLÜMLERİ
+• GENEL BAKIŞ        : ZETX puanı, canlı CPU/GPU/RAM/Disk göstergeleri, sistem özeti, öne çıkan bulgular;
+                       geri yükleme noktası yoksa veya eskiyse "Şimdi Oluştur" önerisi
+• TARAMA & ONARIM    : Tüm bulgular (Kritik/Uyarı/Bilgi), tek tıkla onarım, toplu güvenli onarım + yeniden tarama,
+                       önceki / son tarama / değişim karşılaştırması
+• DONANIM            : SMART disk sağlığı, RAM modülleri, sorunlu aygıtlar, pil sağlığı, WHEA donanım hataları
+• SİSTEM ARIZALARI   : Mavi ekran geçmişi ve çözümleri, ani kapanmalar, GPU sürücü çökmeleri, disk hataları, çöken programlar
+• SÜRÜCÜ & BIOS      : Yüklü sürücü sürümleri; "güncelleme var" yalnızca Windows Update'te o aygıt için GERÇEKTEN daha yeni
+                       sürücü bulunduğunda (veya NVIDIA/AMD ekran kartı sürücüsü 90+ gün eskiyse) gösterilir.
+                       Tarihi eski ama yenisi yayınlanmamış sürücüler "Güncel" sayılır, uyarı verilmez.
+                       BIOS sürümü/tarihi, Secure Boot, TPM, anakart destek sayfası
+• AĞ / İNTERNET      : Ping, jitter, paket kaybı, DNS hızı, Wi-Fi sinyali, ağ sıfırlama, DNS değişimi
+• FPS & OYUNLAR      : 22 oyunda tahmini FPS + "Oyun Ekle" ile kendi oyunlarınız; PresentMon ile ÖNCE / SONRA gerçek FPS ölçümü
+• DARBOĞAZ ANALİZİ   : CPU ↔ GPU donanım dengesi ve oyun içi canlı ölçüm (GPU kullanımı Görev Yöneticisi ile aynı ham sayaçlardan)
+• SİSTEM PUANI       : ZETX Genel Puan (S/A/B/C/D), sağlık ve performans puanı, WinSAT testleri
+• DOSYA ONARIMI      : Tam Onarım, SFC, DISM, CHKDSK, Windows Update sıfırlama, WMI, simge önbelleği vb.
+• KAYIT DEFTERİ      : Geçersiz girdiler (yedekli temizlik), tam yedek / geri yükleme, ele geçirme kontrolü
+• TEMİZLİK           : Gereksiz dosyalar, başlangıç programları, güç planı
+• TAKİP & RAPOR      : Tarama geçmişi, puan grafiği, HTML rapor, haftalık otomatik tarama
+• HAKKINDA           : Geliştirici, Discord ve e-posta
+
+Program verileri: Belgeler\ZETX PC Ariza Takip
+Hata kaydı: Belgeler\ZETX PC Ariza Takip\Kayitlar\hata-kaydi.log  → sorun olursa Discord'dan bu dosyayı gönderin.
+Gereksinim: Windows 10 / 11 (64 bit), PowerShell 5.1 (Windows'ta hazır gelir), yönetici izni.

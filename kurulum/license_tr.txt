@@ -1,0 +1,15 @@
+﻿ZETX PC ARIZA TAKİP ONARIM — ÜCRETSİZ KULLANIM KOŞULLARI
+
+Bu program Volkan Sezer (ZETX) tarafından geliştirilmiştir ve kişisel kullanım için ücretsizdir.
+
+1. Program; donanım, sistem, sürücü, kayıt defteri ve ağ durumunu analiz eder, öneriler sunar ve onayınızla onarım işlemleri uygular.
+2. Onarım işlemleri (SFC, DISM, CHKDSK, kayıt defteri temizliği, ağ sıfırlama vb.) sistem ayarlarını değiştirebilir. Bu nedenle program, önemli işlemlerden önce sistem geri yükleme noktası oluşturmanızı önerir; kayıt defteri değişikliklerinden önce otomatik yedek alır.
+3. Program "olduğu gibi" sunulur. Olası veri kaybı veya sistem sorunlarından geliştirici sorumlu tutulamaz. Önemli verilerinizi düzenli olarak yedekleyin.
+4. Gerçek FPS ölçümü için isteğe bağlı olarak Intel PresentMon (açık kaynak, MIT lisanslı) aracı indirilir.
+5. Program kişisel verilerinizi hiçbir yere göndermez; tüm raporlar ve kayıtlar Belgeler\ZETX PC Ariza Takip klasöründe saklanır.
+
+İletişim ve destek:
+Discord: https://discord.gg/nvqc84AHZf
+E-posta: volkan.sezer@outlook.com.tr
+
+© Volkan Sezer — ZETX / ZETXTV
