@@ -11,6 +11,20 @@
   <a href="https://discord.gg/nvqc84AHZf">Discord</a>
 </p>
 
+<p align="center">
+  <img src="ekran-goruntuleri/01-genel-bakis.png" alt="Genel Bakış" width="100%">
+</p>
+
+## Ekran Görüntüleri
+
+| Tarama & Onarım | Sürücü & BIOS |
+|:---:|:---:|
+| <img src="ekran-goruntuleri/02-tarama-onarim.png" alt="Tarama ve Onarım"> | <img src="ekran-goruntuleri/03-surucu-bios.png" alt="Sürücü ve BIOS"> |
+| **FPS & Oyunlar** | **Darboğaz Analizi** |
+| <img src="ekran-goruntuleri/04-fps-oyunlar.png" alt="FPS ve Oyunlar"> | <img src="ekran-goruntuleri/05-darbogaz-analizi.png" alt="Darboğaz Analizi"> |
+
+<sub>Görseller programın arayüzünü temsil eder; değerler örnektir ve her bilgisayarda farklıdır.</sub>
+
 ---
 
 ## Kurulum
