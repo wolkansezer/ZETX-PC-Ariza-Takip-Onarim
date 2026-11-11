@@ -6,7 +6,7 @@
 
 <p align="center">
   <b>Ücretsiz</b> Windows arıza tespit ve onarım programı — donanım, sistem, sürücü/BIOS, kayıt defteri, darboğaz analizi, oyun FPS tahmini ve ölçümü.<br>
-  <a href="../../releases/latest"><b>⬇ Son sürümü indir (Setup.exe)</b></a> •
+  <a href="https://github.com/wolkansezer/zetx-pc-ariza-takip-onarim/raw/main/indir/ZETX-PC-Ariza-Takip-Onarim-Setup.exe"><b>⬇ Kurulum dosyasını indir (Setup.exe, v1.3.1)</b></a> •
   <a href="https://discord.gg/nvqc84AHZf">Discord</a>
 </p>
 
@@ -14,7 +14,7 @@
 
 ## Kurulum
 
-1. [Releases](../../releases/latest) sayfasından **ZETX PC Ariza Takip Onarim Setup.exe** dosyasını indirin.
+1. **[ZETX-PC-Ariza-Takip-Onarim-Setup.exe](https://github.com/wolkansezer/zetx-pc-ariza-takip-onarim/raw/main/indir/ZETX-PC-Ariza-Takip-Onarim-Setup.exe)** dosyasını indirin (depodaki `indir/` klasöründe).
 2. Çalıştırın ve kurulum sihirbazını izleyin. Program, Başlat menüsüne ve isteğe bağlı olarak masaüstüne kısayol ekler.
 3. Programı kısayoldan açın (yönetici izni ister).
 
@@ -53,6 +53,7 @@ EXE-OLUSTUR.bat / Build-EXE.ps1  ps2exe ile tek dosyalık EXE üretme (İndirile
 kaynak/                          Kaynak kod: head.ps1 (başlangıç), core.ps1 (motor), ui.ps1 (arayüz)
 derleme/build.py                 kaynak/ → tek dosyalık .ps1 derleyici
 kurulum/                         Kurulum sihirbazı (NSIS) ve başlatıcı EXE (C) kaynakları
+indir/                           Hazır kurulum dosyası (Setup.exe)
 ```
 
 ### Derleme
